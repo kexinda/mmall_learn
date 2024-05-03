@@ -1,5 +1,5 @@
 package com.mmall.common;
-
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.io.Serializable;
@@ -33,7 +33,7 @@ public class ServerResponse<T> implements Serializable{
         this.data = data;
     }
 
-    @jsonIgnore
+    @JsonIgnore
     public boolean isSuccess(){
         return this.status == ResponseCode.SUCCESS.GetCode();
     }
@@ -56,7 +56,7 @@ public class ServerResponse<T> implements Serializable{
         return new ServerResponse<T>(ResponseCode.SUCCESS.GetCode(),msg);
     }
 
-    public static <T> ServerResponse<T> createBySuccessMessage(T data){
+    public static <T> ServerResponse<T> createBySuccess(T data){
         return new ServerResponse<T>(ResponseCode.SUCCESS.GetCode(),data);
     }
 
