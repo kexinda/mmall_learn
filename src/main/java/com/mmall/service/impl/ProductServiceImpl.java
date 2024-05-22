@@ -64,13 +64,10 @@ public class ProductServiceImpl implements IProductService{
                     return ServerResponse.createBySuccessMessage("failed add new product");
                 }
             }
-
-
         }
         return ServerResponse.createByErrorMessage("wrong parameter to add new product");
 
     }
-
 
     public ServerResponse<String> setSaleStatus(Integer productId, Integer status){
         if(productId == null || status == null){
@@ -79,13 +76,11 @@ public class ProductServiceImpl implements IProductService{
         Product product = new Product();
         product.setId(productId);
         product.setStatus(status);
-
         int rowCount = productMapper.updateByPrimaryKey(product);
         if(rowCount > 0){
             return ServerResponse.createBySuccessMessage("success update product status");
         }
         return ServerResponse.createByErrorMessage("Failed to update product status");
-
     }
 
     public ServerResponse<ProductDetailVo> manageProductDetail(Integer productId){
@@ -102,7 +97,6 @@ public class ProductServiceImpl implements IProductService{
         return ServerResponse.createBySuccess(productDetailVo);
     }
 
-
     private ProductDetailVo assembleProductDetailVo(Product product){
         ProductDetailVo productDetailVo = new ProductDetailVo();
         productDetailVo.setId(product.getId());
@@ -115,7 +109,6 @@ public class ProductServiceImpl implements IProductService{
         productDetailVo.setName(product.getName());
         productDetailVo.setStatus(product.getStatus());
         productDetailVo.setStock(product.getStock());
-
         productDetailVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.happymmall.com/"));
         Category category = categoryMapper.selectByPrimaryKey(product.getCategoryId());
         if(category == null){
